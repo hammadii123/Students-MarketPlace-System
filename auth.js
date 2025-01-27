@@ -4,6 +4,8 @@ let signup_Password = document.getElementById("signup_password");
 let signup_Button = document.getElementById("signup_button");
 let signup_spinner = document.getElementById("spinner");
 
+let signUp_with_google_btn= document.getElementById("google-signup")
+
 
 let signin_Email=document.getElementById("signin_email");
 let signin_Password=document.getElementById("signin_password");
@@ -15,33 +17,91 @@ let signin_Button=document.getElementById("signin_button");
 // signup_spinner.style.display = "none";
 async function signup() {
   try {
-    signup_spinner.style.display = "block";
+    signup_spinner.style.display = "block"; // Show spinner
 
+    // Step 1: Sign up the user
     const { data, error } = await supabase.auth.signUp({
       email: signup_Email.value,
       password: signup_Password.value,
     });
 
-    if (error) throw error;
-    if (data) {
-      console.log(signup_Email.value);
-      console.log(signup_Password.value);
-    //   alert("Please check your email for confirmation..");
-    Swal.fire({
+    if (error) throw error; // Throw error if signup fails
+
+    if (data.user) {
+      console.log("User created successfully:", data.user);
+
+      Swal.fire({
         title: "Please check your email for confirmation!",
         icon: "success",
-        draggable: true
+        draggable: true,
       });
+
+       //  Set role based on email
+       const role = signup_Email.value === "hammad@mailinator.com" ? "admin" : "user";
+
+      //  Insert the user into the "users" table
+      
+      const { error: userError } = await supabase
+
+        .from("users")
+        .insert([
+          {
+            id: data.user.id, // Use the correct ID from the signup response
+            email: signup_Email.value,
+            role: role, // Default role
+          },
+        ]);
+
+      if (userError) {
+        console.error("Error inserting into users table:", userError);
+        Swal.fire({
+          title: "Error saving user to the database.",
+          text: userError.message,
+          icon: "error",
+        });
+        return;
+      }
+
+      console.log("User added to users table successfully.");
     }
 
-    return data;
+    // Clear input fields
+    signup_Email.value = "";
+    signup_Name.value = ""; // Optional if you're using the name field later
+    signup_Password.value = "";
   } catch (error) {
-    console.log(error);
-    alert("Error signing up. Please try again.");
-  
+    console.error("Error during signup:", error);
+    Swal.fire({
+      title: "Error signing up!",
+      text: error.message,
+      icon: "error",
+    });
   } finally {
-    signup_spinner.style.display = "none";
+    signup_spinner.style.display = "none"; // Hide spinner
   }
+}
+async function signUpGoogle(){
+  try {
+    event.preventDefault()
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/dashboard.html`, // Redirect to the dashboard
+      },
+    })
+
+    if (error) throw error;
+    if (data){
+      console.log(data);
+   
+    
+
+} 
+  }
+
+catch (error){
+  console.log("Error:"+error);
+}
 }
 
 
@@ -53,6 +113,7 @@ async function signIn() {
             password: signin_Password.value,
           })
           if (error) throw error;
+          console.log(data);
 
           if(data){
             Swal.fire({
@@ -60,7 +121,38 @@ async function signIn() {
                 icon: "success",
                 draggable: true
               });
-              window.location.href = '/dashboard.html'
+
+              console.log(data.user.email)
+
+              // if (data.user.email  =="hammad@mailinator.com" && data.user.id=="95ae4d45-881a-48fe-b1eb-0e31283efbed"){
+              //   // console.log(email.value,password.value);
+
+              //   window.location.href = '/dashboard.html'
+              // }
+               // Fetch user's role from the "users" table
+
+
+
+  // This is my auth logic for the future 
+    //   const { data: userData, error: roleError } = await supabase
+    //   .from("users")
+    //   .select("role")
+    //   .eq("id", data.user.id)
+    //   .single();
+
+    // if (roleError) throw roleError; 
+
+    // console.log("User Role:", userData.role);
+
+    // // Redirect based on role
+    // if (userData.role === "admin") {
+    //   window.location.href = "/dashboard.html"; // Admin goes to dashboard
+    // } else {
+    //   window.location.href = "/marketplace.html"; // User goes to marketplace
+    // }
+    
+    
+      window.location.href = "/dashboard.html"; // User goes to marketplace
           }
 
           return data
@@ -86,7 +178,14 @@ if (signup_Button) {
 }
 
 
+if(signUp_with_google_btn){
+  signUp_with_google_btn.addEventListener("click", signUpGoogle);
+}
+
+
 // if signin button is clicked
 if(signin_Button){
     signin_Button.addEventListener("click",signIn)
 }
+
+
