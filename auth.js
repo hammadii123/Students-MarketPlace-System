@@ -28,7 +28,6 @@ async function signup() {
     if (error) throw error; // Throw error if signup fails
 
     if (data.user) {
-      console.log("User created successfully:", data.user);
 
       Swal.fire({
         title: "Please check your email for confirmation!",
@@ -61,8 +60,6 @@ async function signup() {
         });
         return;
       }
-
-      console.log("User added to users table successfully.");
     }
 
     // Clear input fields
@@ -188,4 +185,27 @@ if(signin_Button){
     signin_Button.addEventListener("click",signIn)
 }
 
+async function checkSession() {
+  try {
+      const { data, error } = await supabase.auth.getSession();
+      if (error) throw error;
 
+      let authPages = ["/index.html", "/login.html", "/"];
+      let currentPath = window.location.pathname;
+      let isAuth = authPages.some((page) => page.includes(currentPath));
+      const session = data.session;
+      if (session) {
+          if (isAuth) {
+              window.location.href = "/marketplace.html";
+          }
+      }
+      if (session === null) {
+          if (!isAuth) {
+              window.location.href = "/login.html";
+          }
+      }
+  } catch (error) {
+      console.log(error);
+  }
+}
+checkSession();
