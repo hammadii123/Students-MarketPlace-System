@@ -40,7 +40,8 @@
     }
   }
 /* header */
-header{background-color: #343A40;}
+.container-fluid{background-color: #343A40;}
+.form-select{width: 350px;}
 header .bi-search{right: 12%;top: 20%;color: #535252ef;}
 header .bi-toggles2{cursor: pointer;}
 header input{min-width: 300px;height: 40px;border: none; border-radius: 20px;}
