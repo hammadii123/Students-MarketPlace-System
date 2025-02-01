@@ -19,7 +19,7 @@
 
 <body>
   <div class="container-fluid d-flex justify-content-between p-5">
-    <div>Logo</div>
+    <div><button class="btn btn-outline-light rounded-3" id="logOut">Log Out</button></div>
     <select class="form-select" aria-label="Default select example" id="filterSelect">
       <option value="none" disabled selected>View By Price</option>
       <option value="all">All</option>
@@ -28,14 +28,18 @@
       <option value="1001-2000">1001-2000</option>
       <option value="2001-5000">2001-5000</option>
     </select>
-    <div><button class="btn btn-outline-light rounded-5">Favourites</button></div>
+    <div class="d-flex gap-3"><button class="btn btn-outline-light rounded-3" id="AllBooks">All</button>
+      <button class="btn btn-outline-light rounded-3" id="Favourites">Favourites</button>
+    </div>
   </div>
 
 
   <!-- card section -->
 
   <div class=" container-xxl vh-100 row row-cols-lg-3 row-cols-md-2  row-cols-1 gx-5 gy-4 mx-auto cards my-3"
-    id="books-grid">
+    id="books-grid"></div>
+  <div class=" container-xxl vh-100 row row-cols-lg-3 row-cols-md-2  row-cols-1 gx-5 gy-4 mx-auto cards my-3"
+    id="Fav-books-grid">
 
   </div>
   <!-- loader -->
