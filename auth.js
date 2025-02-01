@@ -11,13 +11,10 @@ let signin_Email=document.getElementById("signin_email");
 let signin_Password=document.getElementById("signin_password");
 let signin_Button=document.getElementById("signin_button");
 
-// const Swal = require('sweetalert2')
 
-
-// signup_spinner.style.display = "none";
 async function signup() {
   try {
-    signup_spinner.style.display = "block"; // Show spinner
+    signup_spinner.style.display = "block"; 
 
     // Step 1: Sign up the user
     const { data, error } = await supabase.auth.signUp({
@@ -25,7 +22,7 @@ async function signup() {
       password: signup_Password.value,
     });
 
-    if (error) throw error; // Throw error if signup fails
+    if (error) throw error; 
 
     if (data.user) {
 
@@ -38,16 +35,16 @@ async function signup() {
        //  Set role based on email
        const role = signup_Email.value === "hammad@mailinator.com" ? "admin" : "user";
 
-      //  Insert the user into the "users" table
+      
       
       const { error: userError } = await supabase
 
         .from("users")
         .insert([
           {
-            id: data.user.id, // Use the correct ID from the signup response
+            id: data.user.id, 
             email: signup_Email.value,
-            role: role, // Default role
+            role: role, 
           },
         ]);
 
@@ -64,7 +61,7 @@ async function signup() {
 
     // Clear input fields
     signup_Email.value = "";
-    signup_Name.value = ""; // Optional if you're using the name field later
+    signup_Name.value = ""; 
     signup_Password.value = "";
   } catch (error) {
     console.error("Error during signup:", error);
@@ -74,7 +71,7 @@ async function signup() {
       icon: "error",
     });
   } finally {
-    signup_spinner.style.display = "none"; // Hide spinner
+    signup_spinner.style.display = "none"; 
   }
 }
 async function signUpGoogle(){
@@ -83,7 +80,7 @@ async function signUpGoogle(){
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${window.location.origin}/dashboard.html`, // Redirect to the dashboard
+        redirectTo: `${window.location.origin}/dashboard.html`, 
       },
     })
 
@@ -149,7 +146,7 @@ async function signIn() {
     // }
     
     
-      window.location.href = "/dashboard.html"; // User goes to marketplace
+      window.location.href = "/dashboard.html"; 
           }
 
           return data
@@ -169,7 +166,7 @@ async function signIn() {
 
 
 
-//if signup button is clicked
+
 if (signup_Button) {
   signup_Button.addEventListener("click", signup);
 }
@@ -180,7 +177,7 @@ if(signUp_with_google_btn){
 }
 
 
-// if signin button is clicked
+
 if(signin_Button){
     signin_Button.addEventListener("click",signIn)
 }

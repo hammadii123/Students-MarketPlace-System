@@ -1,88 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>This is my marketPlace</title>
+  <title>BookMarket - Professional Book Marketplace</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="style.css">
-
+  <link rel="stylesheet" href="marketplace.css">
 </head>
 
-<body>
-  <div class="container-fluid d-flex justify-content-between p-5">
-    <div>Logo</div>
-    <select class="form-select" aria-label="Default select example" id="filterSelect">
-      <option value="none" disabled selected>View By Price</option>
-      <option value="all">All</option>
-      <option value="0-500">0-500</option>
-      <option value="501-1000">501-1000</option>
-      <option value="1001-2000">1001-2000</option>
-      <option value="2001-5000">2001-5000</option>
-    </select>
-    <div><button class="btn btn-outline-light rounded-5">Favourites</button></div>
-  </div>
+<body class="bg-light">
+  <!-- Header -->
+  <header class="bg-dark shadow-sm py-3">
+    <div class="container-fluid">
+        <nav class="navbar navbar-dark bg-dark">  <div class="container-fluid">
+                <a class="navbar-brand fs-4 fw-bold" href="#">📚 BookMarket</a>  <div class="d-flex align-items-center">  <select class="form-select me-2 w-auto bg-light border-dark" id="filterSelect">
+                        <option value="none" disabled selected>View By Price</option>
+                        <option value="all">All</option>
+                        <option value="0-500">0-500</option>
+                        <option value="501-1000">501-1000</option>
+                        <option value="1001-2000">1001-5000</option>
+                    </select>
+                    <button class="btn btn-outline-light rounded-pill px-3" type="button">  <i class="bi bi-heart-fill me-2"></i>Favourites
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+  
 
+  <!-- Main Content -->
+  <main class="container-xxl py-5">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="books-grid"></div>
+  </main>
 
-  <!-- card section -->
-
-  <div class=" container-xxl vh-100 row row-cols-lg-3 row-cols-md-2  row-cols-1 gx-5 gy-4 mx-auto cards my-3"
-    id="books-grid">
-
-  </div>
-  <!-- loader -->
-  <div class="vh-100 vw-100 d-flex justify-content-center align-items-center  position-fixed top-0" id="loader-screen">
-    <span class="loader "></span>
-  </div>
-
-
-
-  <!-- footer -->
-
-
-  <!-- form card -->
-
-  <div class="scale-up-center  d-flex align-items-center vh-100  top-0 w-100 " id="form">
-    <div class="contact container-xxl w-50  text-light border  rounded-4 pt-5 bg-black position-relative">
-      <i class="bi bi-x-circle h4 position-absolute top-0 end-0 m-2" id="form-close-btn"></i>
-      <div>
-        <form action=""> <label class="form-label" for="">Full Name</label><input class="form-control " type="text">
-          <label class="fonr-label" for="">Email</label><input class="form-control" type="text">
-        </form>
-      </div>
-      <div><label class="form-label" for="">Message</label><textarea class="form-control " name="" id=""></textarea>
-      </div>
-      <button class="w-25 my-4 btn btn-primary ">Submit</button>
+  <!-- Loader -->
+  <div class="loader-overlay" id="loader-screen">
+        <div class="loader"></div>
     </div>
 
+  <!-- Contact Form -->
+  <div class="contact-modal" id="form">
+    <div class="contact-content">
+      <i class="bi bi-x-lg close-btn" id="form-close-btn"></i>
+      <h3 class="mb-4">Contact Us</h3>
+      <form>
+        <div class="mb-3 ">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" required>
+        </div>
+        <div class="mb-4">
+          <label class="form-label">Message</label>
+          <textarea class="form-control" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Send Message</button>
+      </form>
+    </div>
   </div>
 
-
-
-
-
-
-
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-    crossorigin="anonymous"></script>
-
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-    crossorigin="anonymous"></script>
   <script type="module" src="config.js"></script>
   <script type="module" src="app.js"></script>
   <script type="module" src="auth.js"></script>
-  <!-- <script type="module" src="books.js"></script> -->
 </body>
-
 </html>

@@ -1,0 +1,195 @@
+:root {
+    --primary: #2A2F4F;
+    --secondary: #917FB3;
+    --accent: #E5BEEC;
+    --light: #FDE2F3;
+  }
+  
+  /* Base Styles */
+  body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+  }
+  
+  /* Header */
+  header {
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+  }
+  
+  /* Book Cards */
+  .card-book {
+    background: white;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+  }
+  
+  .card-book:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+  
+  .card-img {
+    height: 280px;
+    object-fit: cover;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+  
+  .book-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0.75rem;
+  }
+  
+  .book-author {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  
+  .book-description {
+    color: #495057;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    
+ 
+    overflow: hidden;
+  }
+  
+  .price-tag {
+    background: var(--secondary);
+    color: white;
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+  
+  .btn-buy {
+    background: var(--primary);
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-buy:hover {
+    background: var(--secondary);
+    color: white;
+  }
+  
+  /* Loader */
+ /* Loader Overlay */
+.loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    display: none; 
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 3px solid var(--primary);
+    border-radius: 50%;
+    position: relative;
+    animation: rotation 1s linear infinite;
+}
+
+.loader::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 3px solid;
+    border-color: var(--secondary) transparent;
+}
+
+@keyframes rotation {
+    0% { transform: rotate(0deg) }
+    100% { transform: rotate(360deg) }
+}
+
+.show {
+    display: block !important;
+}
+
+.hide {
+    display: none !important;
+}
+
+  
+  /* Contact Form */
+  .contact-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .contact-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+    color: var(--primary);
+    transition: color 0.3s ease;
+  }
+  
+  .close-btn:hover {
+    color: var(--secondary);
+  }
+  
+  .form-control {
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 0.75rem;
+    border-radius: 8px;
+  }
+  
+  .form-control:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(42,47,79,0.1);
+  }
+
+  .card-book {
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 8px, rgba(0, 0, 0, 0.2) 0px 6px 20px inset;
+}
+
+.card-book:hover {
+    box-shadow: rgba(0, 0, 0, 0.6) 0px 4px 8px, rgba(0, 0, 0, 0.3) 0px 6px 20px inset;
+}

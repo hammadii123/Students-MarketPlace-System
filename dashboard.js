@@ -8,10 +8,10 @@ const image = document.getElementById("image");
 const addBookBtn = document.getElementById("addBtn");
 const bookList = document.getElementById("book-list");
 
-// Book data array
+
 let books = [];
 
-// Function to display books in the table
+
 function displayBooks() {
   bookList.innerHTML = ""; 
 
@@ -26,7 +26,7 @@ function displayBooks() {
     authorCell.textContent = book.author;
     priceCell.textContent = book.price;
 
-    // Add delete button
+    
     actionsCell.innerHTML = `
       <button class="btn btn-sm btn-danger" onclick="deleteBook(${index})">Delete</button>
     `;
@@ -42,7 +42,7 @@ window.deleteBook = async function (index) {
 
    
 
-    // Delete the book from Supabase database
+    // Delete book from Supabase 
     const { error: dbError } = await supabase
       .from("Books")
       .delete()
@@ -53,7 +53,7 @@ window.deleteBook = async function (index) {
     // Remove the book from the local books array
     books.splice(index, 1);
 
-    // Re-render the books
+    // Re-render 
     displayBooks();
 
     
@@ -75,11 +75,11 @@ window.deleteBook = async function (index) {
 
 
 
-// Function to add a new book
+
 async function addItems(event) {
-  event.preventDefault(); // Prevent page reload
+  event.preventDefault(); 
   
-  // Get input values
+  
   const titleValue = title.value.trim();
   const authorValue = author.value.trim();
   const priceValue = parseFloat(price.value).toFixed(2);
@@ -97,18 +97,19 @@ async function addItems(event) {
   }
 
   try {
-    // Generate a unique file name for the image and specify the folder
-    const folderPath = "uploads"; // Define folder path
-    const fileName = `${folderPath}/${Date.now()}_${imageFile.name}`; // Upload in the 'uploads' folder
+    // unique file name for the image and specify the folder
+    const folderPath = "uploads"; 
+    const fileName = `${folderPath}/${Date.now()}_${imageFile.name}`; 
 
-    // Upload the image to Supabase bucket
+    
+
     const { data: uploadData, error: uploadError } = await supabase.storage
       .from("book-images")
       .upload(fileName, imageFile);
 
     if (uploadError) throw uploadError;
 
-    // Get the public URL of the uploaded image
+    // public URL of the uploaded image
     const { data: publicURLData } = supabase.storage
       .from("book-images")
       .getPublicUrl(fileName);
@@ -118,7 +119,7 @@ async function addItems(event) {
 
 
 
-    // Insert the book into Supabase
+    //  book into Supabase
     const { data, error } = await supabase
       .from("Books")
       .insert([
@@ -138,14 +139,14 @@ async function addItems(event) {
       console.log(data)
     }
 
-    // Clear form fields
+    
     title.value = "";
     author.value = "";
     price.value = "";
     description.value = "";
     image.value = "";
 
-    // Notify success
+  
     Swal.fire({
       title: "Book Added Successfully",
       icon: "success",
@@ -166,15 +167,15 @@ async function addItems(event) {
 // Fetch books from Supabase
 async function fetchBooks() {
   try {
-    // Fetch books from Supabase
+    
     const { data, error } = await supabase.from("Books").select("*");
 
     if (error) throw error;
 
-    // Update the local books array with the fetched data
+    // Updated local books array with the fetched data
     books = data;
 
-    // Display books in the table
+    
     displayBooks();
   } catch (error) {
     console.error("Error fetching books:", error);
@@ -189,7 +190,7 @@ async function fetchBooks() {
 
 window.onload= fetchBooks();
 
-// Add event listener to Add button
+
 if (addBookBtn) {
   addBookBtn.addEventListener("click", addItems);
 }
