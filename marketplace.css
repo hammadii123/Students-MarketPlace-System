@@ -36,7 +36,9 @@ header {
   object-fit: cover;
   border-bottom: 1px solid rgba(0,0,0,0.1);
 }
-
+.fav-col{
+  height: max-content !important;
+}
 .card-body {
   padding: 1.5rem;
 }
