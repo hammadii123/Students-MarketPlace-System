@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,35 +18,49 @@
   <!-- Header -->
   <header class="bg-dark shadow-sm py-3">
     <div class="container-fluid">
-        <nav class="navbar navbar-dark bg-dark">  <div class="container-fluid">
-                <a class="navbar-brand fs-4 fw-bold" href="#">📚 BookMarket</a>  <div class="d-flex align-items-center">  <select class="form-select me-2 w-auto bg-light border-dark" id="filterSelect">
-                        <option value="none" disabled selected>View By Price</option>
-                        <option value="all">All</option>
-                        <option value="0-500">0-500</option>
-                        <option value="501-1000">501-1000</option>
-                        <option value="1001-2000">1001-5000</option>
-                    </select>
-                    <button class="btn btn-outline-light rounded-pill px-3" type="button">  <i class="bi bi-heart-fill me-2"></i>Favourites
-                    </button>
-                </div>
+      <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand fs-4 fw-bold" href="#">📚 BookMarket</a>
+          <div class="d-flex align-items-center"> <select class="form-select me-2 w-auto bg-light border-dark"
+              id="filterSelect">
+              <option value="none" disabled selected>View By Price</option>
+              <option value="all">All</option>
+              <option value="0-500">0-500</option>
+              <option value="501-1000">501-1000</option>
+              <option value="1001-2000">1001-5000</option>
+            </select>
+            <div>
+              <button class="btn btn-outline-light rounded-pill px-3" id="AllBooks">All Books</button>
+              <button class="btn btn-outline-light rounded-pill px-3" type="button" id="Favourites"> <i
+                  class="bi bi-heart-fill me-2"></i>Favourites
+              </button>
             </div>
-        </nav>
+          </div>
+          <div>
+            <button class="btn btn-outline-light rounded-pill px-3" id="logOut">Log Out</button>
+          </div>
+        </div>
+      </nav>
     </div>
-</header>
-  
+  </header>
+
 
   <!-- Main Content -->
   <main class="container-xxl py-5">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="books-grid"></div>
+    <div class=" container-xxl vh-100 row row-cols-lg-3 row-cols-md-2  row-cols-1 gx-5 gy-4 mx-auto cards my-3"
+      id="Fav-books-grid">
+
+    </div>
   </main>
 
   <!-- Loader -->
   <div class="loader-overlay" id="loader-screen">
-        <div class="loader"></div>
-    </div>
+    <div class="loader"></div>
+  </div>
 
   <!-- Contact Form -->
-  <div class="contact-modal" id="form">
+  <!-- <div class="contact-modal" id="form">
     <div class="contact-content">
       <i class="bi bi-x-lg close-btn" id="form-close-btn"></i>
       <h3 class="mb-4">Contact Us</h3>
@@ -65,7 +80,7 @@
         <button type="submit" class="btn btn-primary w-100">Send Message</button>
       </form>
     </div>
-  </div>
+  </div> -->
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
@@ -75,4 +90,5 @@
   <script type="module" src="app.js"></script>
   <script type="module" src="auth.js"></script>
 </body>
+
 </html>
